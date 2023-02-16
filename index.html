@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <style>
+      * {
+         margin: 0;
+         padding: 0;
+         box-sizing: border-box;
+         font-family: 'Poppins', sans-serif;
+      }
+
+      body {
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         flex-wrap: wrap;
+         background: #222;
+         gap: 20px;
+         min-height: 100vh;
+      }
+
+      .btn {
+         position: relative;
+         padding: 12px 40px;
+         font-size: 1.2rem;
+         border-radius: 40px;
+         background: #2f2f2f;
+         color: #bbb;
+         letter-spacing: 0.15em;
+         text-decoration: none;
+         text-transform: uppercase;
+         user-select: none;
+         transition: 0.5s;
+         overflow: hidden;
+      }
+      .btn:hover {
+         color: #fff;
+      }
+
+      .btn span {
+         position: absolute;
+         border: 2px solid #fff;
+         transform: translate(-50%, -50%);
+         pointer-events: none;
+         border-radius: 50%;
+         filter: brightness(2);
+         animation: animate 2s linear infinite;
+      }
+
+      @keyframes animate {
+         0% {
+            width: 0;
+            height: 0;
+         }
+         100% {
+            width: 350px;
+            height: 350px;
+         }
+      }
+   </style>
+</head>
+<body>
+   <a href="#" class="btn">Awesome</a>
+   <a href="#" class="btn">Button</a>
+
+   <script>
+      let btn = document.querySelectorAll('.btn')
+      btn.forEach(btn => {
+         btn.onclick = function(e) {
+            let x = e.pageX - e.target.offsetLeft
+            let y = e.pageY - e.target.offsetTop
+
+            let color = "#" + Math.floor(Math.random() * 0xFFFFFF).toString(16)
+
+            let ripples = document.createElement('span')
+            ripples.style.left = x +'px'
+            ripples.style.top = y +'px'
+            ripples.style.borderColor = color
+            this.appendChild(ripples)
+
+            setTimeout(() => {
+               ripples.remove()
+            }, 2000);
+         }
+      });
+   </script>
+</body>
+</html>
